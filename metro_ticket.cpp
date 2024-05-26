@@ -64,8 +64,7 @@ void TicketPriceMetro() {
 
 void BookMetroTicket() {
     ofstream myfile;
-    myfile.open ("ticket.txt");
-    string name,date,stationNameEntry,stationNameExit;
+    string name,date,stationNameEntry,stationNameExit,filePath;
     cout << "Ok can you tell a few details ." << endl;
     cout<<"You name: ";
     cin.ignore();
@@ -74,17 +73,19 @@ void BookMetroTicket() {
     getline(cin,stationNameEntry);
     cout<<"To which station: ";
     getline(cin,stationNameExit);
+    filePath = name+".txt";
+    myfile.open (filePath);
 
     time_t now = time(0);
 
     tm *ltm = localtime(&now);
     cout<<endl;
     cout<<"*****************************************************"<<endl;
-    cout<<"Ticket for "<<name<<"\n "<<stationNameEntry<<"/"<<stationNameExit<<"\t"<<setfill('0') << setw(2) << ltm->tm_mday << "/"<<setfill('0') << setw(2) << ltm->tm_mon + 1 << "/"<<setfill('0') << setw(2) << (ltm->tm_year + 1900) % 100 <<"\n"<<"Ticket Price "<<ticketPrice<<" Rs\nThanks for using Metro Bus Service."<<endl;
+    cout<<"Ticket for "<<name<<"\n"<<stationNameEntry<<"/"<<stationNameExit<<"\t"<<setfill('0') << setw(2) << ltm->tm_mday << "/"<<setfill('0') << setw(2) << ltm->tm_mon + 1 << "/"<<setfill('0') << setw(2) << (ltm->tm_year + 1900) % 100 <<"\n"<<"Ticket Price "<<ticketPrice<<" Rs\nThanks for using Metro Bus Service."<<endl;
     cout<<"****************************************************"<<endl;
     //We are saving the metro ticket in console printed form
     myfile<<"*****************************************************\n";
-    myfile<<"Ticket for "<<name<<"\n "<<stationNameEntry<<"/"<<stationNameExit<<"\t"<<setfill('0') << setw(2) << ltm->tm_mday << "/"<<setfill('0') << setw(2) << ltm->tm_mon + 1 << "/"<<setfill('0') << setw(2) << (ltm->tm_year + 1900) % 100 <<"\n"<<"Ticket Price "<<ticketPrice<<" Rs\nThanks for using Metro Bus Service.\n";
+    myfile<<"Ticket for "<<name<<"\n"<<stationNameEntry<<"/"<<stationNameExit<<"\t"<<setfill('0') << setw(2) << ltm->tm_mday << "/"<<setfill('0') << setw(2) << ltm->tm_mon + 1 << "/"<<setfill('0') << setw(2) << (ltm->tm_year + 1900) % 100 <<"\n"<<"Ticket Price "<<ticketPrice<<" Rs\nThanks for using Metro Bus Service.\n";
     myfile<<"*****************************************************\n";
     myfile.close();
 }
